@@ -1,0 +1,1412 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#450b18">
+<title>Món quà nhỏ cho em vào ngày đầu năm</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --wine: #4b0c1d;
+  --wine2: #781c30;
+  --gold: #f4d58a;
+  --cream: #fff5df;
+  --ink: #542a2d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  background: #240711;
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 50% 10%, #872d3c 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 80%, #641329 0%, transparent 45%),
+    linear-gradient(145deg, #240711, #4b0c1d 60%, #210711);
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #ffe9ac 70%, transparent),
+    radial-gradient(1px 1px at 30% 70%, #fff 70%, transparent),
+    radial-gradient(2px 2px at 80% 30%, #ffe9ac 70%, transparent),
+    radial-gradient(1px 1px at 70% 80%, #fff 70%, transparent),
+    radial-gradient(2px 2px at 50% 45%, #ffe9ac 70%, transparent),
+    radial-gradient(1px 1px at 90% 60%, #fff 70%, transparent);
+  background-size: 260px 220px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .35; }
+  to { opacity: 1; }
+}
+
+.lantern {
+  position: fixed;
+  top: 12%;
+  font-size: 42px;
+  opacity: .75;
+  filter: drop-shadow(0 0 16px #ffb34f);
+  animation: sway 4s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+.lantern.left { left: 5%; }
+.lantern.right { right: 5%; animation-delay: -2s; }
+
+@keyframes sway {
+  from { transform: rotate(-8deg) translateY(-3px); }
+  to { transform: rotate(8deg) translateY(9px); }
+}
+
+.screen {
+  display: none;
+  min-height: 100svh;
+  width: 100%;
+  padding: 36px 20px;
+  align-items: center;
+  justify-content: center;
+  animation: enter .65s ease both;
+}
+
+.screen.active { display: flex; }
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(18px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.container {
+  width: min(820px, 100%);
+  margin: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+h1, h2, p { margin-top: 0; }
+
+h1 {
+  font-size: clamp(34px, 7vw, 68px);
+  line-height: 1.13;
+  margin: 18px 0;
+  color: var(--gold);
+  text-shadow: 0 0 32px #e4a84a55;
+}
+
+h2 {
+  font-size: clamp(27px, 5vw, 42px);
+  color: var(--gold);
+  margin: 12px 0 18px;
+}
+
+.subtitle {
+  color: #f7dfd1;
+  line-height: 1.9;
+  max-width: 580px;
+  margin: 0 auto 28px;
+}
+
+.flower {
+  font-size: 72px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 20px #ffcf7770);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-9px) rotate(3deg); }
+}
+
+.btn {
+  border: 1px solid #f8df9e;
+  background: linear-gradient(135deg, #f9dfa0, #dba94c);
+  color: #4a101d;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-weight: 800;
+  box-shadow: 0 8px 28px #0003;
+  transition: transform .2s, filter .2s;
+}
+
+.btn:hover { transform: translateY(-3px); filter: brightness(1.08); }
+
+.btn.secondary {
+  color: var(--cream);
+  background: #ffffff0c;
+  border-color: #e8c67b88;
+  box-shadow: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.envelope-card {
+  min-height: 190px;
+  padding: 22px 12px;
+  border-radius: 20px;
+  border: 1px solid #f3d28a77;
+  background: linear-gradient(145deg, #8b2738, #4b0c1d 75%);
+  box-shadow: 0 15px 35px #0002, inset 0 0 25px #f4d58a0c;
+  transition: transform .25s, border-color .25s;
+  color: white;
+}
+
+.envelope-card:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  border-color: var(--gold);
+}
+
+.envelope-icon {
+  font-size: 52px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 12px #ffc96966);
+}
+
+.envelope-card strong {
+  display: block;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.envelope-card small { color: #f5dcd4; }
+
+.reveal-box {
+  display: none;
+  margin-top: 22px;
+  padding: 24px;
+  border: 1px solid #e7c57c88;
+  border-radius: 18px;
+  background: #fff6e9;
+  color: var(--ink);
+  line-height: 1.9;
+  animation: enter .5s ease both;
+}
+
+.reveal-box.show { display: block; }
+
+.reveal-box .big-message {
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(27px, 5vw, 40px);
+  color: #8b2537;
+  margin-bottom: 12px;
+}
+
+.paper {
+  width: min(740px, 100%);
+  background:
+    linear-gradient(#fff9edee, #fff4dfef),
+    repeating-linear-gradient(0deg, transparent 0 31px, #d7b77d33 32px);
+  color: var(--ink);
+  padding: clamp(24px, 6vw, 54px);
+  border: 2px solid #e6c478;
+  border-radius: 5px 24px 5px 24px;
+  box-shadow: 0 20px 80px #0006;
+  position: relative;
+  text-align: left;
+}
+
+.paper:before {
+  content: "✦";
+  position: absolute;
+  top: 13px;
+  right: 18px;
+  color: #b78a3c;
+  font-size: 23px;
+}
+
+.paper-heading {
+  text-align: center;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(30px, 6vw, 44px);
+  color: #8b2537;
+  margin-bottom: 22px;
+}
+
+.letter-content {
+  font-size: 14px;
+  line-height: 2;
+  min-height: 140px;
+  /* Chừa sẵn chỗ cho chữ ký để tờ giấy không bị dài ra khi chữ ký xuất hiện. */
+  padding-bottom: 52px;
+  box-sizing: border-box;
+}
+
+.letter-line {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .65s, transform .65s;
+  margin-bottom: 13px;
+}
+
+.letter-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.signature {
+  font-family: "Dancing Script", cursive;
+  font-size: 29px;
+  color: #8b2537;
+  text-align: right;
+}
+
+.hidden { display: none !important; }
+
+.notice {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #8c6c61;
+  margin-top: 14px;
+}
+
+.footer {
+  margin-top: 26px;
+  color: #e7c9c3;
+  font-size: 11px;
+  opacity: .8;
+}
+
+@media (min-width: 700px) {
+  .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .screen { padding: 26px 15px; }
+  .lantern { font-size: 29px; top: 5%; }
+  .card-grid { gap: 10px; }
+  .envelope-card { min-height: 160px; padding: 16px 8px; }
+  .envelope-icon { font-size: 43px; }
+  .paper { padding: 28px 21px; }
+}
+
+/* ===== MỘT BAO LỘC DUY NHẤT + LÁ THƯ BÍ MẬT ===== */
+.single-gift-stage { width: min(620px, 100%); margin: 34px auto 16px; min-height: 310px; display: grid; place-items: center; position: relative; }
+.single-envelope-wrap { position: relative; display: flex; flex-direction: column; align-items: center; transition: opacity .7s ease, transform .7s ease; }
+.envelope-aura { position: absolute; width: 220px; height: 220px; border-radius: 50%; top: 5px; background: radial-gradient(circle, #ffd66a2e 0, #e6a63c14 40%, transparent 70%); animation: envelopeAura 2.6s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes envelopeAura { from { transform: scale(.88); opacity: .55; } to { transform: scale(1.12); opacity: 1; } }
+.single-envelope { width: 156px; height: 208px; position: relative; border: 1px solid #f4d58a; border-radius: 13px 13px 18px 18px; cursor: pointer; overflow: hidden; background: linear-gradient(145deg,#a62b43 0%,#6b142b 48%,#3e0a1c 100%); box-shadow: 0 18px 38px #12030a66, inset 0 0 0 5px #f2d28b20, inset 0 0 0 7px #f2d28b44, 0 0 28px #e6b94a22; animation: envelopeFloat 3s ease-in-out infinite; transition: transform .7s ease, opacity .7s ease, filter .7s ease; z-index: 1; }
+.single-envelope::before { content:""; position:absolute; inset:13px; border:1px solid #f2d28b88; border-radius:7px; pointer-events:none; }
+.single-envelope::after { content:""; position:absolute; left:0; right:0; top:0; height:56%; background:linear-gradient(145deg,#bd4050,#7e1830); clip-path:polygon(0 0,100% 0,50% 70%); border-bottom:1px solid #f5d88b; transform-origin:top; transition:transform .8s cubic-bezier(.2,.75,.2,1); }
+.single-envelope .envelope-seal { position:absolute; z-index:2; left:50%; top:44%; transform:translate(-50%,-50%); display:grid; place-items:center; width:49px; height:49px; border-radius:50%; color:#6d1b2b; background:linear-gradient(145deg,#fff0bd,#d7a64b); border:2px solid #fff0bd; box-shadow:0 3px 12px #24060c66; font-family:serif; font-size:25px; }
+.single-envelope .envelope-tassel { position:absolute; z-index:2; bottom:18px; left:50%; transform:translateX(-50%); color:#f6d78a; font-size:20px; }
+@keyframes envelopeFloat { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-8px) rotate(1deg); } }
+.single-envelope:hover { filter:brightness(1.12) drop-shadow(0 0 16px #f8d77a55); }
+.single-envelope:focus-visible { outline:2px solid #fff0bd; outline-offset:7px; }
+.single-envelope-wrap.opening .single-envelope { animation:none; transform:translateY(24px) scale(.9); filter:brightness(1.4); }
+.single-envelope-wrap.opening .single-envelope::after { transform:rotateX(180deg); }
+.single-envelope-wrap.opening { opacity:0; transform:translateY(30px) scale(.8); pointer-events:none; }
+.envelope-hint { margin:18px 0 0; color:#f7dfac; font-size:14px; letter-spacing:.04em; }
+/* Phần mở bao lì xì: tiền lộc thay cho lá thư thứ hai */
+.secret-letter { display:none; width:min(540px,100%); box-sizing:border-box; padding:clamp(24px,5vw,38px); text-align:center; color:#5d3030; border:1px solid #e6c779; border-radius:10px; background:linear-gradient(145deg,#fff9eb,#f5e3bf); box-shadow:0 22px 50px #12030a55,inset 0 0 0 5px #fffdf4,inset 0 0 0 6px #dfbd6c77; position:relative; animation:secretLetterRise .9s cubic-bezier(.2,.8,.2,1) both; }
+.secret-letter.show { display:block; }
+@keyframes secretLetterRise { from { opacity:0; transform:translateY(45px) scale(.92); } to { opacity:1; transform:translateY(0) scale(1); } }
+.secret-letter-ornament { color:#b88b3b; letter-spacing:.22em; margin-bottom:10px; }
+.secret-letter-kicker { text-align:center; font-size:10px; letter-spacing:.24em; color:#9c6f34; font-weight:800; }
+.secret-letter h3 { text-align:center; color:#85283a; font-family:"Dancing Script",cursive; font-size:clamp(28px,5vw,38px); margin:10px 0 18px; }
+.lucky-money-stack { position:relative; width:min(330px,100%); height:150px; margin:0 auto 20px; }
+.lucky-note { position:absolute; left:50%; top:50%; width:min(290px,88%); height:112px; border:2px solid #d8b45b; border-radius:8px; background:linear-gradient(135deg,#e7edbd,#a8c47e 50%,#dce8a9); box-shadow:0 8px 18px #4d381d35,inset 0 0 0 5px #f6f0bd88; transform:translate(-50%,-50%) rotate(-7deg); overflow:hidden; }
+.lucky-note.back { transform:translate(-50%,-50%) rotate(7deg) translateY(-5px); background:linear-gradient(135deg,#dce9ad,#8db66f 50%,#c8dc91); }
+.lucky-note::before { content:""; position:absolute; inset:9px; border:1px solid #8f9c4d99; border-radius:4px; }
+.lucky-note::after { content:"福"; position:absolute; inset:0; display:grid; place-items:center; color:#557b46; font-family:serif; font-size:49px; text-shadow:0 1px #fff9c5; opacity:.22; }
+.lucky-note .money-amount { position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%); width:90%; color:#36552e; font-size:clamp(17px,4.5vw,25px); line-height:1; font-weight:900; letter-spacing:.01em; text-align:center; white-space:nowrap; text-shadow:0 1px #fff8c8, 0 0 5px #fff8c8; }
+.lucky-note .note-value { position:absolute; z-index:1; top:10px; left:15px; color:#547344; font-size:12px; font-weight:800; }
+.lucky-note .note-value.right { left:auto; right:15px; }
+.lucky-money-stack.reveal .lucky-note.back { animation:moneyBack .8s .12s cubic-bezier(.2,.8,.2,1) both; }
+.lucky-money-stack.reveal .lucky-note.front { animation:moneyFront .85s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes moneyFront { from { opacity:0; transform:translate(-50%,20%) rotate(-20deg) scale(.65); } to { opacity:1; transform:translate(-50%,-50%) rotate(-7deg) scale(1); } }
+@keyframes moneyBack { from { opacity:0; transform:translate(-50%,20%) rotate(20deg) scale(.65); } to { opacity:1; transform:translate(-50%,-50%) rotate(7deg) translateY(-5px) scale(1); } }
+.secret-letter-body { font-family:"Be Vietnam Pro",sans-serif; font-size:15px; line-height:1.9; }
+.secret-letter-body p { margin:0 0 12px; }
+.secret-letter-signature { margin-top:14px; color:#8c2638; font-family:"Dancing Script",cursive; font-size:26px; font-weight:bold; }
+.lucky-progress { color:#ffe8b0; font-size:14px; line-height:1.8; margin:18px 0; }
+.btn:disabled { opacity:.48; cursor:not-allowed; transform:none; filter:none; box-shadow:none; }
+@media (max-width:600px) { .single-gift-stage { min-height:280px; margin-top:25px; } .single-envelope { width:136px; height:184px; } .secret-letter { padding:23px 18px; } .secret-letter-body { font-size:14px; line-height:1.85; } .lucky-money-stack { height:135px; } .lucky-note { height:100px; } }
+
+/* ===== MÀN LỰA CHỌN SAU KHI CHỌN MỘT BAO LÌ XÌ ===== */
+.choice-panel {
+  width: min(650px, 100%);
+  margin: 26px auto 0;
+  display: grid;
+  gap: 14px;
+}
+.choice-btn {
+  width: 100%;
+  min-height: 58px;
+  padding: 15px 20px;
+  border: 1px solid #f4d58a99;
+  border-radius: 16px;
+  color: #fff4d8;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8c2437, #5a1025);
+  box-shadow: 0 10px 25px #0003;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.choice-btn:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 12px 30px #0005; }
+.choice-form {
+  display: none;
+  width: min(650px, 100%);
+  margin: 18px auto 0;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid #e8c67b99;
+  border-radius: 18px;
+  background: #fff7e9;
+  color: var(--ink);
+}
+.choice-form.show { display: block; }
+.choice-submenu { display:none; width:min(650px,100%); margin:14px auto 0; gap:10px; }
+.choice-submenu.show { display:grid; animation:subMenuIn .28s ease both; }
+.choice-submenu .choice-btn { min-height:50px; font-size:14px; background:linear-gradient(135deg,#6e2638,#421323); }
+@keyframes subMenuIn { from {opacity:0;transform:translateY(-6px)} to {opacity:1;transform:translateY(0)} }
+.voice-panel { display:none; width:min(650px,100%); margin:16px auto 0; padding:20px; text-align:left; border:1px solid #e8c67b99; border-radius:18px; background:#fff7e9; color:var(--ink); }
+.voice-panel.show { display:block; }
+.voice-panel p { line-height:1.7; }
+.voice-controls { display:flex; flex-wrap:wrap; gap:9px; margin-top:12px; }
+.voice-controls .btn { flex:1 1 135px; }
+.voice-status { font-size:13px; color:#8c2638; min-height:1.5em; margin-top:10px; }
+.voice-preview { display:none; width:100%; margin-top:14px; }
+.voice-preview.show { display:block; }
+.choice-form label { display:block; font-size:13px; font-weight:700; margin-bottom:8px; }
+.choice-form textarea { width:100%; padding:13px; border:1px solid #d6bd96; border-radius:12px; background:#fff; color:#51202b; resize:vertical; }
+.choice-form .notice { color:#8c6c61; }
+#runawayBtn {
+  position: relative;
+  opacity: 1;
+  transition: opacity .42s ease, transform .25s ease, box-shadow .2s, border-color .2s;
+  will-change: opacity, left, top;
+}
+#runawayBtn.fading-away {
+  opacity: 0;
+  pointer-events: none;
+}
+/* Hộp giấy nhắn nhủ bật lên khi nút catch-me chạy trốn */
+.runaway-note {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 10000;
+  width: min(340px, calc(100vw - 32px));
+  padding: 27px 20px 17px;
+  color: #602334;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 700;
+  background:
+    radial-gradient(ellipse at 15% 18%, #ffffffa8 0%, transparent 34%),
+    radial-gradient(ellipse at 88% 82%, #e8c98b55 0%, transparent 38%),
+    repeating-linear-gradient(0deg, #fff6e8 0px, #fff6e8 3px, #f9edda 4px, #fff6e8 7px);
+  border: 1px solid #d8b66f;
+  border-radius: 5px 14px 5px 14px;
+  box-shadow: 0 16px 42px #13030ba8, inset 0 0 0 4px #fff9ed, inset 0 0 0 5px #d8b66f88;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .28s ease, transform .28s ease;
+  transform: translate(-50%, -45%) rotate(-2deg) scale(.86);
+}
+.runaway-note.show { pointer-events: auto; }
+.runaway-note.closing {
+  opacity: 0;
+  transform: translate(-50%, -46%) rotate(2deg) scale(.92);
+}
+.runaway-note .note-close {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #d8b66f99;
+  border-radius: 50%;
+  background: #fffaf0;
+  color: #602334;
+  font: 700 18px/1 Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 6px #60233418;
+}
+.runaway-note .note-close:hover { background: #f4e2bd; transform: scale(1.06); }
+.runaway-note .note-close:focus-visible { outline: 2px solid #a7772f; outline-offset: 2px; }
+.runaway-note::before {
+  content: "✦  MỘT TỜ NHẮN NHỎ  ✦";
+  display: block;
+  margin-bottom: 8px;
+  color: #a7772f;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+.runaway-note::after {
+  content: "🌸";
+  display: block;
+  margin-top: 7px;
+  font-size: 18px;
+}
+.runaway-note.show {
+  visibility: visible;
+  animation: notePop .55s ease both;
+}
+@keyframes notePop {
+  0% { opacity: 0; transform: translate(-50%, -42%) rotate(-5deg) scale(.82); }
+  70% { opacity: 1; transform: translate(-50%, -51%) rotate(-1deg) scale(1.02); }
+  100% { opacity: 1; transform: translate(-50%, -50%) rotate(-2deg) scale(1); }
+}
+@media (max-width: 480px) {
+  .choice-panel { gap: 11px; }
+  .choice-btn { padding: 14px 12px; }
+  .runaway-note { font-size: 16px; padding: 25px 16px 15px; }
+}
+
+
+
+/* ===== NÂNG CẤP THỊ GIÁC: champagne luxe + xuân rơi ===== */
+:root {
+  --wine: #4b0c1d;
+  --wine2: #781c30;
+  --gold: #f4d58a;
+  --cream: #fff5df;
+  --ink: #542a2d;
+  --champagne: #f9e7b6;
+}
+body {
+  background: #210711;
+  background-image: radial-gradient(ellipse at 50% 38%, #70203533 0%, transparent 58%);
+}
+.background {
+  background:
+    radial-gradient(ellipse at 50% 8%, #a54b4d 0%, transparent 36%),
+    radial-gradient(ellipse at 8% 88%, #77213b 0%, transparent 42%),
+    radial-gradient(ellipse at 92% 72%, #5e182c 0%, transparent 38%),
+    linear-gradient(145deg, #200610 0%, #4b0c1d 52%, #250812 100%);
+}
+.background::after {
+  content: ""; position: fixed; inset: 12px; pointer-events: none;
+  border: 1px solid #f4d58a24; border-radius: 18px;
+  box-shadow: inset 0 0 50px #f4d58a06;
+}
+.stars { opacity: .78; background-size: 230px 205px; }
+.screen { position: relative; z-index: 1; }
+.screen.active .eyebrow { animation: luxeFadeUp .7s both; }
+.screen.active h1, .screen.active h2 { animation: titleReveal .9s .08s both; }
+.screen.active .subtitle { animation: luxeFadeUp .8s .18s both; }
+@keyframes luxeFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes titleReveal { from { opacity: 0; transform: translateY(10px); text-shadow: 0 0 0 transparent; } to { opacity: 1; transform: translateY(0); text-shadow: 0 0 28px #e4a84a40; } }
+.flower { filter: drop-shadow(0 0 12px #f5d28b55) drop-shadow(0 0 30px #d76b7133); }
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::before {
+  content: ""; position: absolute; z-index: -1; top: -70%; left: -45%; width: 28%; height: 240%;
+  transform: rotate(25deg); background: linear-gradient(90deg, transparent, #fff9dfaa, transparent);
+  transition: left .65s ease;
+}
+.btn:hover::before { left: 130%; }
+.btn:focus-visible, .choice-btn:focus-visible, .envelope-card:focus-visible, .lucky-envelope:focus-visible {
+  outline: 2px solid #fff0bd; outline-offset: 4px;
+}
+.envelope-card {
+  position: relative; overflow: hidden;
+  background: linear-gradient(145deg, #8f2a40 0%, #68172b 48%, #430b1a 100%);
+  box-shadow: 0 14px 34px #0003, inset 0 1px #ffedc033, inset 0 0 26px #f4d58a0c;
+}
+.envelope-card::after {
+  content: ""; position: absolute; inset: 7px; border: 1px solid #f4d58a24; border-radius: 14px; pointer-events: none;
+}
+.envelope-card:hover { box-shadow: 0 18px 38px #0004, 0 0 22px #f4d58a16, inset 0 1px #ffedc055; }
+.envelope-icon { transition: transform .35s ease, filter .35s ease; }
+.envelope-card:hover .envelope-icon { transform: translateY(-3px) scale(1.07); filter: drop-shadow(0 0 16px #ffd98b99); }
+.reveal-box { box-shadow: 0 14px 38px #0002, inset 0 0 0 5px #fff9ef, inset 0 0 0 6px #e4c88e88; }
+.paper {
+  background: linear-gradient(135deg, #fffaf0 0%, #fff3d9 52%, #f9e8c7 100%);
+  border: 1px solid #d8b56b;
+  box-shadow: 0 28px 90px #0007, 0 0 0 7px #f4d58a0c, 0 0 45px #f2cf7c0c;
+  overflow: hidden;
+  animation: paperArrive .9s cubic-bezier(.2,.8,.2,1) both;
+}
+.paper::after {
+  content: ""; position: absolute; inset: 9px; border: 1px solid #b98c4733; border-radius: 3px 17px 3px 17px;
+  pointer-events: none;
+}
+@keyframes paperArrive { from { opacity: 0; transform: translateY(18px) rotateX(2deg) scale(.985); } to { opacity: 1; transform: translateY(0) rotateX(0) scale(1); } }
+.paper-heading { text-shadow: 0 1px #fff; }
+.letter-line.visible { animation: letterInk .65s ease both; }
+@keyframes letterInk { from { filter: blur(1px); } to { filter: blur(0); } }
+.lucky-envelope { border-radius: 16px; }
+.lucky-icon { filter: drop-shadow(0 7px 8px #0005) drop-shadow(0 0 0 #ffd56c00); }
+.lucky-envelope:hover:not(:disabled) .lucky-icon { filter: drop-shadow(0 7px 8px #0004) drop-shadow(0 0 13px #ffd56c88); }
+.lucky-envelope.opened-envelope .lucky-icon { animation: envelopePop .55s cubic-bezier(.18,.89,.32,1.28) both; }
+@keyframes envelopePop { 0% { transform: scale(.75) rotate(-8deg); } 65% { transform: scale(1.16) rotate(4deg); } 100% { transform: scale(1) rotate(0); } }
+.lucky-result { box-shadow: 0 18px 45px #0003, inset 0 0 0 5px #fff9ef, inset 0 0 0 6px #e8c67b88; }
+.choice-btn { background: linear-gradient(115deg, #8b263c, #64152b 55%, #4b0c1d); }
+.choice-btn:hover { box-shadow: 0 12px 30px #0005, 0 0 20px #f4d58a15; }
+.footer { color: #e9d5b4; }
+
+/* Hoa mai/đào rơi: nhẹ, có chiều sâu và không chặn thao tác */
+.petal-layer { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; contain: strict; }
+.petal {
+  position: absolute; top: -12vh; left: var(--left); width: var(--size); height: calc(var(--size) * 1.22);
+  border-radius: 75% 10% 70% 35%; opacity: var(--opacity);
+  background: linear-gradient(145deg, #ffe7b2 0%, #eaa0a1 52%, #b9475b 100%);
+  box-shadow: 0 0 8px #ffd88c22;
+  transform: rotate(var(--rotate));
+  animation: petalFall var(--duration) linear var(--delay) infinite;
+  will-change: transform;
+}
+.petal.gold { background: linear-gradient(145deg, #fff0bd, #d9a94d 70%, #a96b28); border-radius: 65% 35% 70% 20%; }
+@keyframes petalFall {
+  0% { transform: translate3d(0,-5vh,0) rotate(var(--rotate)); }
+  25% { transform: translate3d(var(--drift),25vh,0) rotate(calc(var(--rotate) + 95deg)); }
+  50% { transform: translate3d(calc(var(--drift) * -.55),52vh,0) rotate(calc(var(--rotate) + 205deg)); }
+  75% { transform: translate3d(var(--drift),78vh,0) rotate(calc(var(--rotate) + 300deg)); }
+  100% { transform: translate3d(calc(var(--drift) * -.35),115vh,0) rotate(calc(var(--rotate) + 420deg)); }
+}
+@media (max-width: 600px) {
+  .background::after { inset: 6px; border-radius: 12px; }
+  .petal { opacity: calc(var(--opacity) * .72); }
+  .paper { box-shadow: 0 18px 55px #0006, 0 0 0 4px #f4d58a0a; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  .petal-layer { display: none; }
+}
+
+
+/* Countdown Tết: màn hình chờ trước khi mở toàn bộ trải nghiệm */
+#countdownScreen { position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 50% 42%, rgba(117,25,49,.44), transparent 58%); }
+#fireworksCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.countdown-wrap { width: min(760px, 100%); position: relative; z-index: 1; padding: clamp(20px, 4vw, 42px); border: 1px solid rgba(235,199,124,.28); border-radius: 28px; background: linear-gradient(145deg, rgba(27,13,31,.82), rgba(48,12,30,.68)); box-shadow: 0 20px 80px rgba(0,0,0,.28), inset 0 0 40px rgba(222,174,91,.035); backdrop-filter: blur(8px); }
+.countdown-clock { color: #ffe5a2; font-size: clamp(34px, 7vw, 62px); font-variant-numeric: tabular-nums; letter-spacing: .07em; text-shadow: 0 0 28px rgba(245,201,112,.28); margin: 10px 0 2px; }
+.countdown-date { color: #d9c6b0; letter-spacing: .12em; font-size: 12px; margin-bottom: 28px; }
+.countdown-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: clamp(7px, 2vw, 14px); margin: 20px 0 24px; }
+.countdown-unit { border: 1px solid rgba(231,193,111,.23); border-radius: 15px; padding: 16px 5px 13px; background: rgba(255,255,255,.045); box-shadow: inset 0 1px rgba(255,255,255,.04); }
+.countdown-number { color: #fff0c5; font-size: clamp(25px, 5vw, 43px); font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.countdown-label { color: #cdbb9d; font-size: 10px; letter-spacing: .13em; margin-top: 8px; }
+.countdown-foot { color: #d7c3b0; font-size: 13px; line-height: 1.8; max-width: 500px; margin: 0 auto; }
+.countdown-flower { font-size: 34px; margin: 12px 0 8px; filter: drop-shadow(0 0 16px rgba(255,191,95,.3)); }
+.countdown-line { width: 76px; height: 1px; margin: 20px auto; background: linear-gradient(90deg, transparent, #e7c16f, transparent); }
+@media (max-width: 480px) { .countdown-wrap { border-radius: 22px; padding: 24px 15px; } .countdown-unit { padding: 13px 2px 11px; border-radius: 11px; } .countdown-label { font-size: 9px; letter-spacing: .06em; } }
+
+</style>
+</head>
+
+<body>
+<div class="background"></div>
+<div class="stars"></div>
+<div class="petal-layer" id="petalLayer" aria-hidden="true"></div>
+<div class="lantern left">🏮</div>
+<div class="lantern right">🏮</div>
+
+<!-- MÀN ĐẾM NGƯỢC: chỉ hiển thị màn này trước giao thừa GMT+7 -->
+<section class="screen active" id="countdownScreen" aria-label="Đếm ngược đến Tết Đinh Mùi 2027">
+  <canvas id="fireworksCanvas" aria-hidden="true"></canvas>
+  <div class="countdown-wrap container">
+    <div class="eyebrow">✦ Một món quà nhỏ dành riêng cho em ✦</div>
+    <div class="countdown-flower" aria-hidden="true">🌸</div>
+    <h1>2027 Countdown </h1>
+    <p class="subtitle">Cùng đếm ngược thời khắc giao thừa</p>
+    <div class="countdown-clock" id="vnClock">--:--:--</div>
+    <div class="countdown-date" id="vnDate">ĐANG CẬP NHẬT GIỜ VIỆT NAM</div>
+    <div class="countdown-line"></div>
+    <p class="eyebrow">Đếm ngược đến Tết Đinh Mùi 2027</p>
+    <div class="countdown-grid" aria-live="off">
+      <div class="countdown-unit"><div class="countdown-number" id="cdDays">---</div><div class="countdown-label">NGÀY</div></div>
+      <div class="countdown-unit"><div class="countdown-number" id="cdHours">--</div><div class="countdown-label">GIỜ</div></div>
+      <div class="countdown-unit"><div class="countdown-number" id="cdMinutes">--</div><div class="countdown-label">PHÚT</div></div>
+      <div class="countdown-unit"><div class="countdown-number" id="cdSeconds">--</div><div class="countdown-label">GIÂY</div></div>
+    </div>
+    <p class="countdown-foot">Có một điều dễ thương đang chờ em ở phía trước…<br>Hẹn em vào đúng thời khắc giao thừa nhé 💛</p>
+    <div class="footer">Một món quà nhỏ, dành cho một người đặc biệt vào ngày đầu năm.</div>
+  </div>
+</section>
+
+<!-- MÀN 1: TRANG CHÀO -->
+<section class="screen" id="home">
+  <div class="container">
+    <div class="eyebrow">Giao thừa đã điểm</div>
+    <div class="flower">🌸</div>
+    <h1>Chúc Mừng Em Năm Mới<br>Đinh Mùi 2027</h1>
+    <p class="subtitle">
+      Có một chút mùa xuân, một chút may mắn,
+      vài lời chúc chân thành và một điều đặc biệt
+      anh muốn dành riêng cho em.
+    </p>
+    <button class="btn" onclick="goTo('envelopes')">Mở món quà đầu xuân ✨</button>
+    <div class="footer">Một món quà nhỏ, dành cho một người đặc biệt.</div>
+  </div>
+</section>
+
+<!-- MÀN 2: BÓC LÌ XÌ -->
+<section class="screen" id="envelopes">
+  <div class="container">
+    <div class="eyebrow">Lộc xuân của em</div>
+    <h2>Hãy mở những chiếc lì xì nhé 🧧</h2>
+    <p class="subtitle">Mỗi chiếc phong bao là một lời chúc anh muốn gửi đến em.</p>
+
+    <div class="card-grid">
+      <button class="envelope-card" onclick="openWishEnvelope(0)">
+        <div class="envelope-icon">🧧</div>
+        <strong>Lì xì bình an</strong>
+        <small>Chạm để mở</small>
+      </button>
+      <button class="envelope-card" onclick="openWishEnvelope(1)">
+        <div class="envelope-icon">🧧</div>
+        <strong>Lì xì niềm vui</strong>
+        <small>Chạm để mở</small>
+      </button>
+      <button class="envelope-card" onclick="openWishEnvelope(2)">
+        <div class="envelope-icon">🧧</div>
+        <strong>Lì xì may mắn</strong>
+        <small>Chạm để mở</small>
+      </button>
+      <button class="envelope-card" onclick="openWishEnvelope(3)">
+        <div class="envelope-icon">🧧</div>
+        <strong>Lì xì bí mật</strong>
+        <small>Chạm để mở</small>
+      </button>
+    </div>
+
+    <div class="reveal-box" id="envelopeMessage" aria-live="polite">
+      <div class="big-message" id="envelopeTitle"></div>
+      <div id="envelopeText"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn secondary" onclick="goTo('home')">← Quay lại</button>
+      <button class="btn" id="nextAfterWishes" onclick="goTo('wish')" disabled>
+        Mở khóa khi đọc hết 4 lời chúc 🔒
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- MÀN 3: LỜI CHÚC -->
+<section class="screen" id="wish">
+  <div class="container">
+    <div class="flower">✨</div>
+    <div class="eyebrow">Gửi em trong ngày đầu năm</div>
+    <h2>Mong em có một năm thật dịu dàng</h2>
+    <p class="subtitle">
+      Chúc em luôn khỏe mạnh, ngủ ngon, ăn ngon,
+      làm được những điều mình thích, kết quả học tập luôn tốt
+	  và gặp được thật nhiều chuyện vui vẻ.
+      Mong những điều em đang cố gắng sẽ dần có kết quả,
+      những ngày mệt mỏi sẽ có chỗ để nghỉ ngơi,
+      còn những ngày vui thì sẽ kéo dài thêm nhiều chút.
+    </p>
+    <p class="subtitle">
+      Và mong rằng, dù năm mới có bận rộn đến đâu, 
+      học tập vất vả đến đâu, cuộc sống đôi khi khiến em mệt
+	  em vẫn luôn tìm được lý do để mỉm cười. 🌷
+    </p>
+    <div class="actions">
+      <button class="btn secondary" onclick="goTo('envelopes')">← Xem lại lì xì</button>
+      <button class="btn" onclick="startLetter()">Mở lá thư dành riêng cho em 💌</button>
+    </div>
+  </div>
+</section>
+
+<!-- MÀN 4: LÁ THƯ -->
+<section class="screen" id="letter">
+  <div class="container">
+    <div class="eyebrow">Một vài điều anh muốn nói</div>
+    <div class="paper">
+      <div class="paper-heading">Gửi em, người đặc biệt nhất với anh</div>
+      <div class="letter-content" id="letterContent"></div>
+      <div id="signature" class="signature hidden">— Anh 💛<br> Người đã yêu em rất lâu và mãi sau này vẫn thế</div>
+    </div>
+    <div id="continueLetter" class="actions hidden">
+      <button class="btn" onclick="goTo('lucky')">Có một ít lộc cho em 🧧</button>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" onclick="goTo('wish')">← Quay lại</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- MÀN 5: MỘT BAO LỘC VÀ LÁ THƯ BÍ MẬT -->
+<section class="screen" id="lucky">
+  <div class="container">
+    <div class="flower">🌸</div>
+    <div class="eyebrow">Một món quà nhỏ dành riêng cho em</div>
+    <h2>Tặng cho em chút lộc đầu năm 💌</h2>
+    <p class="subtitle">Mở chiếc bao nhỏ này để nhận chút lộc đầu năm nhé 🧧</p>
+
+    <div class="single-gift-stage" id="singleGiftStage">
+      <div class="single-envelope-wrap" id="singleEnvelopeWrap">
+        <div class="envelope-aura" aria-hidden="true"></div>
+        <button class="single-envelope" id="singleEnvelope" onclick="openSingleLucky()" aria-label="Mở bao lì xì bí mật">
+          <span class="envelope-seal">福</span>
+          <span class="envelope-flap"></span>
+          <span class="envelope-tassel">✦</span>
+        </button>
+        <p class="envelope-hint" id="envelopeHint">Chạm nhẹ để mở bao lì xì ✨</p>
+      </div>
+
+      <article class="secret-letter" id="secretLetter" aria-live="polite">
+        <div class="secret-letter-ornament">✦　❀　✦</div>
+        <div class="secret-letter-kicker">LỘC MAY MẮN ĐẦU NĂM</div>
+        <h3>Lì xì dành riêng cho em 🌸</h3>
+        <div class="lucky-money-stack" id="luckyMoneyStack" aria-label="Hai tờ tiền lì xì minh họa">
+          <div class="lucky-note back"><span class="note-value">LỘC XUÂN</span><span class="note-value right">2027</span><span class="money-amount">+2.000.000</span></div>
+          <div class="lucky-note front"><span class="note-value">LỘC XUÂN</span><span class="note-value right">2027</span><span class="money-amount">+2.000.000</span></div>
+        </div>
+        <div class="secret-letter-body" id="secretLetterBody">Chúc em năm mới bình an, nhiều niềm vui và gặp thật nhiều điều may mắn. Mong năm Đinh Mùi sẽ mang đến cho em những cơ hội đẹp, những nụ cười thật tươi và thật nhiều điều dịu dàng nhé. 💛</div>
+        <div class="secret-letter-signature" id="secretLetterSignature">— Anh<br>Người đã yêu em từ rất lâu </div>
+      </article>
+    </div>
+
+    <p class="lucky-progress" id="luckyProgress" aria-live="polite">Một bao lì xì nhỏ, gửi em chút may mắn đầu năm.</p>
+    <div class="actions">
+      <button class="btn secondary" onclick="goTo('letter')">← Đọc lại lá thư trước</button>
+      <button class="btn" id="nextAfterLucky" onclick="goTo('options')" disabled>Mở bao lì xì trước nhé 🔒</button>
+    </div>
+  </div>
+</section>
+
+<!-- MÀN 6: BA LỰA CHỌN SAU KHI CHỌN MỘT BAO LÌ XÌ -->
+<section class="screen" id="options">
+  <div class="container">
+    <div class="flower">🌸</div>
+    <div class="eyebrow">Một chút điều bất ngờ cho anh nhé xD</div>
+    <h2>Giờ em có muốn chúc tết anh khum? 💌</h2>
+    <p class="subtitle">Chọn một điều em muốn nói với anh nhé.</p>
+
+    <div class="choice-panel">
+      <button class="choice-btn" id="messageChoicesToggle" onclick="toggleMessageChoices()" aria-expanded="false">💬 Gửi tin nhắn cho anh</button>
+      <button class="choice-btn" id="runawayBtn" onmouseenter="runAwayButton()" ontouchstart="runAwayButton(event)">🙈 Em có gì muốn nói với anh đâu — catch me if u can</button>
+    </div>
+    <div class="choice-submenu" id="messageSubmenu" aria-label="Chọn cách gửi lời nhắn">
+      <button class="choice-btn" onclick="toggleVoicePanel()">🎙️ Gửi voice cho anh</button>
+      <button class="choice-btn" onclick="toggleWishForm()">💌 Gửi lời chúc vào tâm trí anh</button>
+      <button class="choice-btn" onclick="openMessenger()">📩 Mở Messenger để nhắn trực tiếp</button>
+    </div>
+    <div class="voice-panel" id="voicePanel">
+      <strong>🎙️ Một lời nhắn bằng giọng nói</strong>
+      <p>Em có thể thu âm lời chúc ngay tại đây, nghe lại, thu lại nếu chưa ưng rồi mới gửi cho anh nha. 💛</p>
+      <div class="voice-controls">
+        <button class="btn" type="button" id="recordVoiceBtn" onclick="startVoiceRecording()">🔴 Bắt đầu thu</button>
+        <button class="btn secondary" type="button" id="stopVoiceBtn" onclick="stopVoiceRecording()" disabled>⏹ Dừng thu</button>
+        <button class="btn secondary" type="button" id="rerecordVoiceBtn" onclick="resetVoiceRecording()" disabled>↻ Thu lại</button>
+        <button class="btn" type="button" id="sendVoiceBtn" onclick="sendVoiceMessage()" disabled>💛 Gửi voice cho anh</button>
+      </div>
+      <audio id="voicePreview" class="voice-preview" controls></audio>
+      <p class="voice-status" id="voiceStatus" role="status" aria-live="polite"></p>
+    </div>
+    <div class="runaway-note" id="runawayNote" role="status" aria-live="polite">
+      <button class="note-close" type="button" aria-label="Đóng tờ nhắn" title="Đóng" onclick="closeRunawayNote()">×</button>
+      Hôm nay là năm mới mà viết gì đó cho ngta vui đi mờ xD
+    </div>
+
+    <form class="choice-form" id="firebaseWishForm" onsubmit="sendTetWish(event)">
+      <label for="tetWishText">Lời chúc Tết của em dành cho anh</label>
+      <textarea id="tetWishText" rows="4" maxlength="1000" placeholder="Viết lời chúc ở đây nè..." required></textarea>
+      <button class="btn" type="submit" style="width:100%;margin-top:12px">Gửi lời chúc 🌸</button>
+      <p id="firebaseWishStatus" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="actions">
+      <button class="btn secondary" onclick="goTo('lucky')">← Xem lại bao lì xì</button>
+      <button class="btn" onclick="goTo('home')">Về đầu trang 🌸</button>
+    </div>
+    <div class="footer">Chúc em một năm mới an lành. Cảm ơn em vì đã ghé qua đây.</div>
+  </div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+// Hoa xuân rơi trang trí; không can thiệp vào luồng điều hướng hay nút tương tác.
+(function createSpringPetals() {
+  const layer = document.getElementById("petalLayer");
+  if (!layer || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const count = window.matchMedia("(max-width: 600px)").matches ? 10 : 18;
+  for (let i = 0; i < count; i++) {
+    const petal = document.createElement("span");
+    petal.className = "petal" + (i % 5 === 0 ? " gold" : "");
+    petal.style.setProperty("--left", `${Math.random() * 100}%`);
+    petal.style.setProperty("--size", `${7 + Math.random() * 9}px`);
+    petal.style.setProperty("--opacity", `${0.24 + Math.random() * 0.34}`);
+    petal.style.setProperty("--rotate", `${Math.random() * 360}deg`);
+    petal.style.setProperty("--duration", `${13 + Math.random() * 16}s`);
+    petal.style.setProperty("--delay", `${-Math.random() * 26}s`);
+    petal.style.setProperty("--drift", `${-55 + Math.random() * 110}px`);
+    layer.appendChild(petal);
+  }
+})();
+
+
+// ================== CÀI ĐẶT NGÀY GIỜ MỞ KHÓA ==================
+// NGÀY CHÍNH THỨC: 00:00 ngày 06/02/2027 theo giờ Việt Nam (GMT+7).
+// Giờ này tương đương 17:00 UTC ngày 05/02/2027.
+// MUỐN TEST: đổi chuỗi bên dưới thành thời điểm TƯƠNG LAI theo dạng ISO UTC,
+// ví dụ '2026-10-29T01:30:00Z'. Lưu file rồi tải lại trang trước thời điểm đó.
+// Khi test xong, nhớ đổi lại '2027-02-05T17:00:00Z'.
+const TET_UNLOCK_AT = Date.parse('2027-02-05T17:00:00Z');
+const FIREWORKS_BEFORE_UNLOCK_MS = 10000; // bắt đầu bắn pháo hoa 10 giây trước giờ mở khóa
+const FIREWORKS_DURATION_AFTER_UNLOCK_MS = 2000; // giữ pháo hoa thêm 2 giây sau giờ mở khóa rồi vào trang chính
+let countdownInterval = null;
+let unlockTransitionStarted = false;
+let fireworksStartedForCountdown = false;
+function enterHomeAfterFireworks() {
+  if (unlockTransitionStarted) return;
+  unlockTransitionStarted = true;
+  if (countdownInterval) window.clearInterval(countdownInterval);
+  // Pháo hoa đã bắt đầu từ 10 giây cuối; không khởi động lại ở đây.
+  window.setTimeout(() => {
+    const gate = document.getElementById('countdownScreen');
+    if (gate && gate.classList.contains('active')) goTo('home');
+  }, FIREWORKS_DURATION_AFTER_UNLOCK_MS);
+}
+function updateCountdown() {
+  const now = Date.now();
+  const clock = document.getElementById('vnClock');
+  const date = document.getElementById('vnDate');
+  const vnNow = new Date(now);
+  const timeFmt = new Intl.DateTimeFormat('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' });
+  const dateFmt = new Intl.DateTimeFormat('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+  if (clock) clock.textContent = timeFmt.format(vnNow);
+  if (date) date.textContent = dateFmt.format(vnNow).toLocaleUpperCase('vi-VN');
+  const remain = TET_UNLOCK_AT - now;
+  // Chỉ bắt đầu pháo hoa trong 10 giây cuối trước giờ mở khóa.
+  if (remain > 0 && remain <= FIREWORKS_BEFORE_UNLOCK_MS && !fireworksStartedForCountdown) {
+    fireworksStartedForCountdown = true;
+    startFireworks();
+  }
+  if (remain <= 0) {
+    enterHomeAfterFireworks();
+    return;
+  }
+  const total = Math.floor(remain / 1000);
+  const values = { cdDays: Math.floor(total / 86400), cdHours: Math.floor((total % 86400) / 3600), cdMinutes: Math.floor((total % 3600) / 60), cdSeconds: total % 60 };
+  for (const [id, value] of Object.entries(values)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = id === 'cdDays' ? String(value).padStart(3, '0') : String(value).padStart(2, '0');
+  }
+}
+function startTetCountdown() {
+  // Mở trang sau giờ khóa: vào thẳng trang chính, không chạy pháo hoa muộn.
+  if (Date.now() >= TET_UNLOCK_AT) {
+    const gate = document.getElementById('countdownScreen');
+    const home = document.getElementById('home');
+    if (gate) gate.classList.remove('active');
+    if (home) home.classList.add('active');
+    return;
+  }
+  updateCountdown();
+  if (!countdownInterval) countdownInterval = window.setInterval(updateCountdown, 1000);
+  // Chưa đến 10 giây cuối thì không có pháo hoa.
+}
+
+// Pháo hoa canvas nhẹ, tự co giãn theo kích thước màn hình.
+let fireworksFrame = null;
+function startFireworks() {
+  const canvas = document.getElementById('fireworksCanvas');
+  if (!canvas || fireworksFrame) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  let w = 0, h = 0, particles = [], nextBurst = 0;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = Math.max(1, rect.width); h = Math.max(1, rect.height);
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function burst() {
+    const x = w * (.14 + Math.random() * .72);
+    const y = h * (.12 + Math.random() * .42);
+    const hue = [39, 345, 48, 28][Math.floor(Math.random() * 4)];
+    const count = 28 + Math.floor(Math.random() * 22);
+    for (let i = 0; i < count; i++) {
+      const angle = Math.PI * 2 * i / count + Math.random() * .12;
+      const speed = 0.7 + Math.random() * 2.5;
+      particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 45 + Math.random() * 30, max: 75, hue, size: .8 + Math.random() * 1.7 });
+    }
+  }
+  function frame(t) {
+    ctx.clearRect(0, 0, w, h);
+    if (t > nextBurst) { burst(); if (Math.random() > .48) burst(); nextBurst = t + (reduceMotion ? 5000 : 1500 + Math.random() * 1700); }
+    particles = particles.filter(p => p.life > 0);
+    for (const p of particles) {
+      p.x += p.vx; p.y += p.vy; p.vy += .012; p.vx *= .992; p.life -= 1;
+      ctx.globalAlpha = Math.max(0, Math.min(1, p.life / p.max));
+      ctx.fillStyle = `hsl(${p.hue} 92% 72%)`;
+      ctx.shadowBlur = 10; ctx.shadowColor = `hsl(${p.hue} 95% 65%)`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+    fireworksFrame = window.requestAnimationFrame(frame);
+  }
+  resize(); window.addEventListener('resize', resize, { passive: true });
+  fireworksFrame = window.requestAnimationFrame(frame);
+}
+
+document.addEventListener('DOMContentLoaded', startTetCountdown);
+
+const wishes = [
+  {
+    title: "Lời chúc bình an 🌷",
+    text: "Mong em và gia đình luôn khỏe mạnh, mọi chuyện lớn nhỏ đều thuận lợi. Khi em mệt thì cứ nghỉ một chút, không cần phải lúc nào cũng mạnh mẽ đâu."
+  },
+  {
+    title: "Lời chúc niềm vui ✨",
+    text: "Mong năm nay có thật nhiều chuyện khiến em vui, nhiều ngày đáng nhớ và nhiều khoảnh khắc mà khi nghĩ lại, em vẫn thấy lòng mình ấm áp, hạnh phúc."
+  },
+  {
+    title: "Lời chúc như ý 🌸",
+    text: "Mong những dự định em ấp ủ sẽ từng bước thành hiện thực. Chúc em luôn kiên nhẫn, mạnh mẽ để theo đuổi điều mình yêu thích và tự tin để tin vào bản thân."
+  },
+  {
+    title: "Một điều bí mật 💌",
+    text: "Có một người đã dành thời gian làm trang web nhỏ này chỉ để gửi em vài lời chúc. Không cần em phải đáp lại điều gì cả, chỉ mong món quà nhỏ này có thể khiến em vui một chút, có ngày đầu năm đầy ý nghĩa."
+  }
+];
+
+const openedWishes = new Set();
+const openedLucky = new Set();
+
+function goTo(id) {
+  if (id === "wish" && openedWishes.size < wishes.length) {
+    alert("Em mở và đọc hết 4 bao lời chúc rồi hãy tiếp tục nhé 💌");
+    return;
+  }
+
+  if (id === "options" && !luckyOpened) {
+    alert("Em chọn một bao lì xì lộc đầu năm trước nhé 🧧");
+    return;
+  }
+
+  const current = document.querySelector(".screen.active");
+  const next = document.getElementById(id);
+  if (!next || current === next) return;
+
+  current.classList.remove("active");
+  next.classList.remove("active");
+  void next.offsetWidth;
+  next.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (id === "lucky") startLuckyTimer();
+}
+
+function openWishEnvelope(index) {
+  const wish = wishes[index];
+  if (!wish || openedWishes.has(index)) return;
+
+  openedWishes.add(index);
+  document.getElementById("envelopeTitle").textContent = wish.title;
+  document.getElementById("envelopeText").textContent = wish.text;
+
+  const box = document.getElementById("envelopeMessage");
+  box.classList.remove("show");
+  void box.offsetWidth;
+  box.classList.add("show");
+
+  const buttons = document.querySelectorAll("#envelopes .envelope-card");
+  const chosen = buttons[index];
+  if (chosen) {
+    chosen.disabled = true;
+    const small = chosen.querySelector("small");
+    if (small) small.textContent = "Đã mở ✓";
+  }
+
+  const nextButton = document.getElementById("nextAfterWishes");
+  if (openedWishes.size === wishes.length) {
+    nextButton.disabled = false;
+    nextButton.textContent = "Đã đọc đủ 4 lời chúc — tiếp tục →";
+  } else {
+    nextButton.disabled = true;
+    nextButton.textContent = `Đã đọc ${openedWishes.size}/4 lời chúc — đọc tiếp nhé 🔒`;
+  }
+}
+
+let luckyOpened = false;
+let luckyRevealTimers = [];
+
+function startLuckyTimer() {
+  // Chỉ có một bao lì xì; khi quay lại màn hình, giữ nguyên kết quả đã mở.
+  const nextButton = document.getElementById("nextAfterLucky");
+  if (luckyOpened) {
+    nextButton.disabled = false;
+    nextButton.textContent = "Tiếp tục →";
+  }
+}
+
+function openSingleLucky() {
+  if (luckyOpened) return;
+  luckyOpened = true;
+  const wrap = document.getElementById("singleEnvelopeWrap");
+  const envelope = document.getElementById("singleEnvelope");
+  const hint = document.getElementById("envelopeHint");
+  const gift = document.getElementById("secretLetter");
+  const money = document.getElementById("luckyMoneyStack");
+  const progress = document.getElementById("luckyProgress");
+  const nextButton = document.getElementById("nextAfterLucky");
+  envelope.disabled = true;
+  hint.textContent = "Bao lì xì đang mở ra…";
+  wrap.classList.add("opening");
+  progress.textContent = "Lộc đầu năm đang được trao đến em ✨";
+
+  window.setTimeout(() => {
+    wrap.style.display = "none";
+    gift.classList.add("show");
+    money.classList.add("reveal");
+    progress.textContent = "Chúc em một năm mới nhiều bình an, may mắn và niềm vui 💛";
+    window.setTimeout(() => {
+      nextButton.disabled = false;
+      nextButton.textContent = "Đón điều bất ngờ tiếp theo →";
+      progress.textContent = "Nhận lộc đầu năm xong rồi thì mình tiếp tục nhé 🌸";
+    }, 1600);
+  }, 750);
+}
+
+const letterLines = [
+  "Em à, vậy là chúng ta lại bước sang một năm mới rồi.",
+  "Anh không biết năm vừa qua của em có những chuyện gì, vui nhiều hơn hay mệt mỏi nhiều hơn. Nhưng anh vẫn mong năm nay mọi thứ sẽ đối xử với em thật dịu dàng.",
+  "Anh làm trang nhỏ này không phải để nói những điều quá lớn lao. Chỉ là vào một dịp đặc biệt như thế này, anh muốn gửi đến em một lời chúc được chuẩn bị bằng sự chân thành.",
+  "Anh mong em luôn giữ được những điều khiến em trở thành chính mình: những sở thích em yêu, những ước mơ em theo đuổi và cả sự vui vẻ của em trong những ngày bình thường nhất.",
+  "Nếu có lúc em thấy mệt, mong em nhớ rằng mình không cần phải hoàn hảo mới xứng đáng được yêu thương. Cứ nghỉ ngơi một chút, chậm lại một chút rồi tiếp tục theo cách của riêng em.",
+  "Còn về phía anh, anh vẫn trân trọng những điều tốt đẹp mà mình dành cho em. Anh không muốn những lời chúc này trở thành áp lực hay khiến em phải cảm thấy có nghĩa vụ đáp lại. Em cứ đón nhận nó như một món quà nhỏ đầu năm thôi nhé.",
+  "Cảm ơn em vì đã xuất hiện trong thế giới của anh, dù phía trước chắc chắn còn nhiều khó khăn, anh sẽ cố gắng hết sức để có thể đến ngày em gật đầu đồng ý. Anh thật lòng mong em có một năm mới bình an, nhiều niềm vui và luôn được sống với những điều em yêu quý.",
+  "Chúc em năm Đinh Mùi 2027 thật nhiều may mắn. Mong những ngày phía trước sẽ có nắng đẹp, có người tử tế bên cạnh và có thật nhiều lý do để em mỉm cười."
+];
+
+let letterStarted = false;
+
+function startLetter() {
+  goTo("letter");
+  if (letterStarted) return;
+
+  letterStarted = true;
+  const content = document.getElementById("letterContent");
+  const signature = document.getElementById("signature");
+  const button = document.getElementById("continueLetter");
+
+  content.innerHTML = "";
+  signature.classList.add("hidden");
+  button.classList.add("hidden");
+
+  letterLines.forEach((line, index) => {
+    const p = document.createElement("p");
+    p.className = "letter-line";
+    p.textContent = line;
+    content.appendChild(p);
+
+    // Mỗi đoạn xuất hiện lần lượt.
+    setTimeout(() => {
+      p.classList.add("visible");
+    }, 700 + index * 1000);
+  });
+
+  const signatureDelay = 700 + letterLines.length * 1000 + 500;
+
+  setTimeout(() => {
+    signature.classList.remove("hidden");
+  }, signatureDelay);
+
+  // Chữ ký hiện trước, đợi 5 giây rồi mới hiện nút tiếp tục.
+  setTimeout(() => {
+    button.classList.remove("hidden");
+  }, signatureDelay + 2000);
+}
+
+// Dán link Messenger cá nhân của anh vào đây (ví dụ: https://m.me/DuongQuocKhoa1103).
+const MESSENGER_URL = "https://m.me/DuongQuocKhoa1103";
+
+function openMessenger() {
+  if (!MESSENGER_URL || MESSENGER_URL.includes("https://m.me/DuongQuocKhoa1103")) {
+    alert("Anh cần điền link Messenger cá nhân vào biến MESSENGER_URL trong code trước nhé.");
+    return;
+  }
+  window.open(MESSENGER_URL, "_blank", "noopener,noreferrer");
+}
+
+function toggleMessageChoices() {
+  const menu = document.getElementById("messageSubmenu");
+  const button = document.getElementById("messageChoicesToggle");
+  const isOpen = menu.classList.toggle("show");
+  button.setAttribute("aria-expanded", String(isOpen));
+  if (isOpen) menu.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function toggleWishForm() {
+  const form = document.getElementById("firebaseWishForm");
+  form.classList.toggle("show");
+  if (form.classList.contains("show")) {
+    form.scrollIntoView({ behavior: "smooth", block: "center" });
+    document.getElementById("tetWishText").focus({ preventScroll: true });
+  }
+}
+
+let voiceRecorder = null;
+let voiceStream = null;
+let voiceChunks = [];
+let voiceBlob = null;
+let voiceObjectUrl = null;
+
+function toggleVoicePanel() {
+  const panel = document.getElementById("voicePanel");
+  panel.classList.toggle("show");
+  if (panel.classList.contains("show")) panel.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function chooseVoiceMimeType() {
+  if (!window.MediaRecorder || !MediaRecorder.isTypeSupported) return "";
+  return ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/ogg;codecs=opus"]
+    .find(type => MediaRecorder.isTypeSupported(type)) || "";
+}
+
+async function startVoiceRecording() {
+  const status = document.getElementById("voiceStatus");
+  if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+    status.textContent = "Trình duyệt này chưa hỗ trợ thu âm. Hãy thử Chrome/Edge mới hoặc Safari mới trên HTTPS nhé.";
+    return;
+  }
+  try {
+    resetVoiceRecording(false);
+    voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mimeType = chooseVoiceMimeType();
+    voiceRecorder = new MediaRecorder(voiceStream, mimeType ? { mimeType } : undefined);
+    voiceChunks = [];
+    voiceRecorder.ondataavailable = event => { if (event.data && event.data.size) voiceChunks.push(event.data); };
+    voiceRecorder.onstop = () => {
+      const type = voiceRecorder.mimeType || mimeType || "audio/webm";
+      voiceBlob = new Blob(voiceChunks, { type });
+      if (voiceObjectUrl) URL.revokeObjectURL(voiceObjectUrl);
+      voiceObjectUrl = URL.createObjectURL(voiceBlob);
+      const preview = document.getElementById("voicePreview");
+      preview.src = voiceObjectUrl;
+      preview.classList.add("show");
+      document.getElementById("sendVoiceBtn").disabled = !voiceBlob.size;
+      document.getElementById("rerecordVoiceBtn").disabled = false;
+      status.textContent = "Thu xong rồi nè. Em nghe thử, muốn thì thu lại, ưng rồi hãy gửi nha. 💛";
+      if (voiceStream) voiceStream.getTracks().forEach(track => track.stop());
+      voiceStream = null;
+    };
+    voiceRecorder.start();
+    document.getElementById("recordVoiceBtn").disabled = true;
+    document.getElementById("stopVoiceBtn").disabled = false;
+    document.getElementById("sendVoiceBtn").disabled = true;
+    document.getElementById("rerecordVoiceBtn").disabled = true;
+    status.textContent = "Đang thu âm… nói xong thì bấm Dừng thu nhé.";
+  } catch (error) {
+    console.error(error);
+    status.textContent = "Chưa mở được micro. Em kiểm tra quyền Microphone của trình duyệt rồi thử lại nhé.";
+    if (voiceStream) voiceStream.getTracks().forEach(track => track.stop());
+    voiceStream = null;
+    document.getElementById("recordVoiceBtn").disabled = false;
+  }
+}
+
+function stopVoiceRecording() {
+  if (voiceRecorder && voiceRecorder.state !== "inactive") voiceRecorder.stop();
+  document.getElementById("stopVoiceBtn").disabled = true;
+  document.getElementById("recordVoiceBtn").disabled = false;
+}
+
+function resetVoiceRecording(showStatus = true) {
+  if (voiceRecorder && voiceRecorder.state !== "inactive") voiceRecorder.stop();
+  if (voiceStream) voiceStream.getTracks().forEach(track => track.stop());
+  voiceStream = null;
+  voiceRecorder = null;
+  voiceChunks = [];
+  voiceBlob = null;
+  if (voiceObjectUrl) URL.revokeObjectURL(voiceObjectUrl);
+  voiceObjectUrl = null;
+  const preview = document.getElementById("voicePreview");
+  preview.pause(); preview.removeAttribute("src"); preview.load(); preview.classList.remove("show");
+  document.getElementById("recordVoiceBtn").disabled = false;
+  document.getElementById("stopVoiceBtn").disabled = true;
+  document.getElementById("rerecordVoiceBtn").disabled = true;
+  document.getElementById("sendVoiceBtn").disabled = true;
+  if (showStatus) document.getElementById("voiceStatus").textContent = "Đã xóa bản thu cũ. Em có thể thu lại nhé.";
+}
+
+// Cấu hình Supabase Storage cho voice. Điền Project URL và anon/publishable key.
+// Không đặt service_role key trong HTML.
+const supabaseUrl = "https://ndjzcuqlhfodtzlnnqzj.supabase.co";
+const supabaseAnonKey = "sb_publishable_n0k-2ONWg1vym5yvIzugVw_5_0OrXo1";
+let supabaseClient = null;
+function getVoiceSupabase() {
+  if (!window.supabase || !window.supabase.createClient) throw new Error("Supabase SDK chưa tải được");
+  if (!supabaseUrl.startsWith("https://") || supabaseAnonKey.startsWith("PASTE_")) {
+    throw new Error("Chưa điền cấu hình Supabase URL/key");
+  }
+  if (!supabaseClient) supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+  return supabaseClient;
+}
+
+async function sendVoiceMessage() {
+  const status = document.getElementById("voiceStatus");
+  if (!voiceBlob || !voiceBlob.size) { status.textContent = "Em thu âm trước rồi mới gửi được nha."; return; }
+  if (voiceBlob.size > 5 * 1024 * 1024) { status.textContent = "Bản ghi hơi lớn rồi; hãy thu ngắn hơn 5 MB nhé."; return; }
+  const sendButton = document.getElementById("sendVoiceBtn");
+  sendButton.disabled = true;
+  status.textContent = "Đang gửi lời nhắn bằng giọng nói cho anh…";
+  try {
+    const client = getVoiceSupabase();
+    const mime = voiceBlob.type || "audio/webm";
+    if (!mime.startsWith("audio/")) throw new Error("Tệp ghi âm không đúng định dạng audio");
+    const ext = mime.includes("mp4") ? "m4a" : mime.includes("ogg") ? "ogg" : mime.includes("wav") ? "wav" : "webm";
+    const path = `${Date.now()}_${crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2, 14)}.${ext}`;
+    const { error } = await client.storage.from("voice-messages").upload(path, voiceBlob, {
+      contentType: mime,
+      cacheControl: "0",
+      upsert: false
+    });
+    if (error) throw error;
+    // Bucket private: không tạo public URL hoặc lưu downloadURL vào database.
+    status.textContent = "Gửi thành công rồi! Anh sẽ nghe lời nhắn của em sớm nha. 💛";
+    resetVoiceRecording(false);
+  } catch (error) {
+    console.error(error);
+    status.textContent = "Gửi chưa thành công. Kiểm tra Supabase URL/key, bucket và Storage Policies nhé.";
+    sendButton.disabled = false;
+  }
+}
+
+// Cấu hình Firebase Realtime Database của anh. Thay các giá trị mẫu bằng config thật.
+const firebaseConfig = {
+  apiKey: "AIzaSyDzcVRh4fwUZHCmgHBX_gN3juqxpkpt7gE",
+  authDomain: "chuc-tet-be-ngay.firebaseapp.com",
+  databaseURL: "https://chuc-tet-be-ngay-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "chuc-tet-be-ngay",
+  messagingSenderId: "121616256497",
+  appId: "1:121616256497:web:f04e1d8ce5efdc2b394850"
+};
+
+async function sendTetWish(event) {
+  event.preventDefault();
+  const message = document.getElementById("tetWishText").value.trim();
+  const status = document.getElementById("firebaseWishStatus");
+  if (!message) return;
+
+  const hasPlaceholder = Object.values(firebaseConfig).some(value =>
+    typeof value === "string" && value.startsWith("PASTE_")
+  );
+  if (hasPlaceholder || !firebaseConfig.databaseURL) {
+    status.textContent = "Firebase chưa được cấu hình. Điền firebaseConfig trong code rồi mới gửi được nhé.";
+    return;
+  }
+
+  try {
+    if (!window.firebase) {
+      status.textContent = "Chưa tải được Firebase. Kiểm tra kết nối mạng rồi thử lại nhé.";
+      return;
+    }
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    await db.ref("tetWishes").push({
+      message,
+      createdAt: firebase.database.ServerValue.TIMESTAMP
+    });
+    status.textContent = "Anh đã nhận được lời chúc của em rồi. Cảm ơn em nha 💛";
+    document.getElementById("tetWishText").value = "";
+  } catch (error) {
+    console.error(error);
+    status.textContent = "Gửi chưa thành công. Anh cần kiểm tra cấu hình hoặc quyền ghi Firebase nhé.";
+  }
+}
+
+let runawayNoteTimer = null;
+let runawayNoteCloseTimer = null;
+
+function closeRunawayNote() {
+  const note = document.getElementById("runawayNote");
+  if (!note || !note.classList.contains("show")) return;
+  if (runawayNoteTimer) window.clearTimeout(runawayNoteTimer);
+  if (runawayNoteCloseTimer) window.clearTimeout(runawayNoteCloseTimer);
+  note.classList.add("closing");
+  runawayNoteCloseTimer = window.setTimeout(() => {
+    note.classList.remove("show", "closing");
+    note.style.visibility = "hidden";
+  }, 300);
+}
+
+function runAwayButton(event) {
+  if (event && event.cancelable) event.preventDefault();
+  const button = document.getElementById("runawayBtn");
+  const note = document.getElementById("runawayNote");
+  if (!button || button.dataset.dismissed === "1") return;
+  button.dataset.dismissed = "1";
+
+  // Nút biến mất vĩnh viễn; tờ nhắn xuất hiện tại vị trí nút vừa nằm.
+  const rect = button.getBoundingClientRect();
+  const noteWidth = Math.min(340, window.innerWidth - 32);
+  const noteHeight = 160;
+  const centerX = Math.min(window.innerWidth - noteWidth / 2 - 12, Math.max(noteWidth / 2 + 12, rect.left + rect.width / 2));
+  const centerY = Math.min(window.innerHeight - noteHeight / 2 - 12, Math.max(noteHeight / 2 + 12, rect.top + rect.height / 2));
+
+  button.classList.add("fading-away");
+  if (note) {
+    if (runawayNoteTimer) window.clearTimeout(runawayNoteTimer);
+    if (runawayNoteCloseTimer) window.clearTimeout(runawayNoteCloseTimer);
+    note.classList.remove("show", "closing");
+    note.style.visibility = "hidden";
+    note.style.visibility = "visible";
+    note.style.left = `${centerX}px`;
+    note.style.top = `${centerY}px`;
+    void note.offsetWidth;
+    note.classList.add("show");
+    // Tự đóng sau 5 giây; người đọc cũng có thể đóng ngay bằng nút ×.
+    runawayNoteTimer = window.setTimeout(closeRunawayNote, 5000);
+  }
+
+  window.setTimeout(() => {
+    button.style.display = "none";
+    button.setAttribute("aria-hidden", "true");
+  }, 430);
+}
+
+</script>
+</body>
+</html>

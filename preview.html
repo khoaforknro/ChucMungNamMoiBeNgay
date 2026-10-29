@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quản lý hộp thư Tết 💌</title>
+
+<style>
+:root {
+  --wine:#6e1930;
+  --cream:#fff9ef;
+  --ink:#43252a;
+  --muted:#765e60;
+  --line:#e6d7c6;
+}
+* { box-sizing:border-box }
+body {
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  max-width:1050px;
+  margin:0 auto;
+  padding:24px 16px 50px;
+  background:linear-gradient(180deg,#fff9ef,#fff3e8);
+  color:var(--ink);
+}
+h1 { font-size:clamp(25px,4vw,36px) }
+h2 { font-size:21px }
+.muted { color:var(--muted) }
+.panel {
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  margin:16px 0;
+}
+.notice {
+  padding:12px;
+  background:#fff3cd;
+  border:1px solid #f0d98c;
+  border-radius:10px;
+  line-height:1.5;
+}
+.tabs,.row {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.tabs { margin:20px 0 }
+button,input { font:inherit }
+button {
+  cursor:pointer;
+  border:0;
+  border-radius:9px;
+  padding:10px 14px;
+  background:var(--wine);
+  color:white;
+  margin:4px 4px 4px 0;
+}
+button:disabled { opacity:.55 }
+.tab { background:#f0e3dc;color:var(--wine) }
+.tab.active { background:var(--wine);color:white }
+input {
+  display:block;
+  width:100%;
+  max-width:480px;
+  padding:11px;
+  border:1px solid #d8c4b9;
+  border-radius:9px;
+  margin:5px 0 12px;
+}
+label {
+  display:block;
+  font-size:14px;
+  font-weight:600;
+  margin-top:8px;
+}
+.status {
+  min-height:24px;
+  margin:10px 0;
+  overflow-wrap:anywhere;
+}
+.item {
+  padding:14px;
+  margin:12px 0;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:white;
+  overflow-wrap:anywhere;
+}
+.item p { white-space:pre-wrap;line-height:1.55 }
+.item audio {
+  display:block;
+  width:100%;
+  max-width:560px;
+  margin:10px 0;
+}
+.danger { background:#991b1b }
+.secondary { background:#6c5960 }
+.hidden { display:none!important }
+.pill {
+  display:inline-block;
+  background:#f5e8e3;
+  color:var(--wine);
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+}
+.tabpage { display:none }
+.tabpage.active { display:block }
+code { overflow-wrap:anywhere }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+
+<body>
+<header>
+  <h1>Hộp thư Tết 💌</h1>
+  <p class="muted">Quản lý lời chúc và ghi âm.</p>
+</header>
+
+<div class="notice">
+  <strong>Lưu ý bảo mật:</strong>
+  Không đặt Supabase service_role key hoặc Firebase private key vào HTML.
+  Chỉ sử dụng Firebase web config và Supabase publishable/anon key.
+  Quyền truy cập phải được bảo vệ bằng rules/policies.
+</div>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="voice">🎙️ Ghi âm · Supabase</button>
+  <button class="tab" data-tab="wishes">💌 Lời chúc · Firebase</button>
+</nav>
+
+<!-- TAB GHI ÂM -->
+<section id="voice" class="tabpage active">
+  <div class="panel">
+    <h2>🎙️ Hộp thư giọng nói</h2>
+    <p class="muted">Đăng nhập tài khoản quản trị Supabase.</p>
+
+    <div id="supabaseLogin">
+      <label>Email Supabase
+        <input id="sbEmail" type="email" autocomplete="username">
+      </label>
+      <label>Mật khẩu Supabase
+        <input id="sbPassword" type="password" autocomplete="current-password">
+      </label>
+      <button id="sbLoginBtn">Đăng nhập Supabase</button>
+      <p id="sbLoginStatus" class="status"></p>
+    </div>
+
+    <div id="supabaseApp" class="hidden">
+      <div class="row">
+        <span class="pill">Đã đăng nhập Supabase</span>
+        <button id="sbRefreshBtn">Tải lại ghi âm</button>
+        <button id="sbLogoutBtn" class="secondary">Đăng xuất</button>
+      </div>
+      <p id="sbStatus" class="status"></p>
+      <div id="voiceItems"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB LỜI CHÚC -->
+<section id="wishes" class="tabpage">
+  <div class="panel">
+    <h2>💌 Lời chúc · Firebase</h2>
+    <p class="muted">
+      Đọc lời chúc trong nhánh <code>tetWishes</code>.
+    </p>
+
+    <div id="firebaseLogin">
+      <label>Email Firebase
+        <input id="fbEmail" type="email" autocomplete="username">
+      </label>
+      <label>Mật khẩu Firebase
+        <input id="fbPassword" type="password" autocomplete="current-password">
+      </label>
+      <button id="fbLoginBtn">Đăng nhập Firebase</button>
+      <p id="fbLoginStatus" class="status"></p>
+    </div>
+
+    <div id="firebaseApp" class="hidden">
+      <div class="row">
+        <span class="pill">Đã đăng nhập Firebase</span>
+        <button id="fbRefreshBtn">Tải lại lời chúc</button>
+        <button id="fbLogoutBtn" class="secondary">Đăng xuất</button>
+      </div>
+      <p id="fbStatus" class="status"></p>
+      <div id="wishItems"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ======================================
+// CẤU HÌNH SUPABASE
+// ======================================
+// Điền Project URL và publishable/anon key.
+// Không sử dụng service_role key.
+
+const SUPABASE_URL = "https://ndjzcuqlhfodtzlnnqzj.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_n0k-2ONWg1vym5yvIzugVw_5_0OrXo1";
+const SUPABASE_BUCKET = "voice-messages";
+
+// ======================================
+// CẤU HÌNH FIREBASE
+// ======================================
+// Sao chép cấu hình từ index.html.
+// Nhớ điền databaseURL chính xác.
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDzcVRh4fwUZHCmgHBX_gN3juqxpkpt7gE",
+  authDomain: "chuc-tet-be-ngay.firebaseapp.com",
+  databaseURL: "https://chuc-tet-be-ngay-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "chuc-tet-be-ngay",
+  storageBucket: "chuc-tet-be-ngay.firebasestorage.app",
+  messagingSenderId: "121616256497",
+  appId: "1:121616256497:web:f04e1d8ce5efdc2b394850"
+};
+
+const $ = id => document.getElementById(id);
+
+function status(id, message) {
+  $(id).textContent = message;
+}
+
+// Chuyển tab
+document.querySelectorAll(".tab").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(tab =>
+      tab.classList.toggle("active", tab === button)
+    );
+
+    document.querySelectorAll(".tabpage").forEach(page =>
+      page.classList.toggle("active", page.id === button.dataset.tab)
+    );
+  });
+});
+
+// ======================================
+// SUPABASE
+// ======================================
+
+let sb = null;
+
+try {
+  if (
+    window.supabase &&
+    SUPABASE_URL.startsWith("https://") &&
+    !SUPABASE_URL.includes("PASTE_") &&
+    !SUPABASE_ANON_KEY.includes("PASTE_")
+  ) {
+    sb = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+  }
+} catch (error) {
+  console.error(error);
+}
+
+$("sbLoginBtn").addEventListener("click", async () => {
+  if (!sb) {
+    status(
+      "sbLoginStatus",
+      "Chưa điền SUPABASE_URL và SUPABASE_ANON_KEY."
+    );
+    return;
+  }
+
+  const button = $("sbLoginBtn");
+  button.disabled = true;
+  status("sbLoginStatus", "Đang đăng nhập...");
+
+  try {
+    const { error } = await sb.auth.signInWithPassword({
+      email: $("sbEmail").value.trim(),
+      password: $("sbPassword").value
+    });
+
+    if (error) throw error;
+
+    $("sbPassword").value = "";
+    await showSupabaseApp();
+  } catch (error) {
+    status(
+      "sbLoginStatus",
+      "Đăng nhập thất bại: " + error.message
+    );
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("sbLogoutBtn").addEventListener("click", async () => {
+  if (sb) await sb.auth.signOut();
+
+  $("supabaseApp").classList.add("hidden");
+  $("supabaseLogin").classList.remove("hidden");
+  $("voiceItems").replaceChildren();
+  status("sbStatus", "");
+});
+
+$("sbRefreshBtn").addEventListener("click", loadVoiceFiles);
+
+async function showSupabaseApp() {
+  if (!sb) return;
+
+  const { data } = await sb.auth.getSession();
+  if (!data.session) return;
+
+  $("supabaseLogin").classList.add("hidden");
+  $("supabaseApp").classList.remove("hidden");
+
+  await loadVoiceFiles();
+}
+
+async function loadVoiceFiles() {
+  if (!sb) return;
+
+  status("sbStatus", "Đang tải danh sách ghi âm...");
+  $("voiceItems").replaceChildren();
+
+  try {
+    const { data, error } = await sb.storage
+      .from(SUPABASE_BUCKET)
+      .list("", {
+        limit: 100,
+        sortBy: { column: "created_at", order: "desc" }
+      });
+
+    if (error) throw error;
+
+    const files = (data || []).filter(file =>
+      file.name && !file.name.startsWith(".")
+    );
+
+    if (!files.length) {
+      status("sbStatus", "Chưa có ghi âm nào trong bucket.");
+      return;
+    }
+
+    status("sbStatus", `Có ${files.length} tệp ghi âm.`);
+
+    for (const file of files) {
+      const card = document.createElement("article");
+      card.className = "item";
+
+      const title = document.createElement("strong");
+      title.textContent = file.name;
+
+      const date = document.createElement("p");
+      date.className = "muted";
+      date.textContent = file.created_at
+        ? new Date(file.created_at).toLocaleString("vi-VN")
+        : "Không có thời gian";
+
+      const audio = document.createElement("audio");
+      audio.controls = true;
+      audio.preload = "none";
+
+      const play = document.createElement("button");
+      play.textContent = "Tạo link nghe tạm thời";
+
+      play.addEventListener("click", async () => {
+        play.disabled = true;
+
+        try {
+          const { data, error } = await sb.storage
+            .from(SUPABASE_BUCKET)
+            .createSignedUrl(file.name, 120);
+
+          if (error) throw error;
+
+          audio.src = data.signedUrl;
+          audio.load();
+          play.textContent = "Link nghe có hạn 2 phút";
+        } catch (error) {
+          status("sbStatus", "Lỗi tạo link nghe: " + error.message);
+        } finally {
+          play.disabled = false;
+        }
+      });
+
+      const del = document.createElement("button");
+      del.className = "danger";
+      del.textContent = "Xóa ghi âm";
+
+      del.addEventListener("click", async () => {
+        if (!confirm("Xóa vĩnh viễn bản ghi âm này?")) return;
+
+        del.disabled = true;
+
+        try {
+          const { error } = await sb.storage
+            .from(SUPABASE_BUCKET)
+            .remove([file.name]);
+
+          if (error) throw error;
+
+          await loadVoiceFiles();
+        } catch (error) {
+          status("sbStatus", "Xóa thất bại: " + error.message);
+          del.disabled = false;
+        }
+      });
+
+      card.append(title, date, play, del, audio);
+      $("voiceItems").append(card);
+    }
+  } catch (error) {
+    status(
+      "sbStatus",
+      "Không tải được ghi âm: " + error.message +
+      ". Kiểm tra bucket và Storage policies."
+    );
+  }
+}
+
+if (sb) {
+  sb.auth.getSession().then(({ data }) => {
+    if (data.session) showSupabaseApp();
+  });
+}
+
+// ======================================
+// FIREBASE
+// ======================================
+
+let fbApp = null;
+let fbAuth = null;
+let fbDb = null;
+
+try {
+  if (
+    window.firebase &&
+    firebaseConfig.apiKey &&
+    !firebaseConfig.apiKey.includes("PASTE_") &&
+    firebaseConfig.databaseURL &&
+    !firebaseConfig.databaseURL.includes("PASTE_")
+  ) {
+    fbApp =
+      firebase.apps.find(app => app.name === "tet-admin") ||
+      firebase.initializeApp(firebaseConfig, "tet-admin");
+
+    fbAuth = fbApp.auth();
+    fbDb = fbApp.database();
+  }
+} catch (error) {
+  console.error(error);
+}
+
+$("fbLoginBtn").addEventListener("click", async () => {
+  if (!fbAuth) {
+    status(
+      "fbLoginStatus",
+      "Chưa điền firebaseConfig đầy đủ, đặc biệt là databaseURL."
+    );
+    return;
+  }
+
+  const button = $("fbLoginBtn");
+  button.disabled = true;
+  status("fbLoginStatus", "Đang đăng nhập Firebase...");
+
+  try {
+    await fbAuth.signInWithEmailAndPassword(
+      $("fbEmail").value.trim(),
+      $("fbPassword").value
+    );
+
+    $("fbPassword").value = "";
+    await showFirebaseApp();
+  } catch (error) {
+    status(
+      "fbLoginStatus",
+      "Đăng nhập Firebase thất bại: " + error.message
+    );
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("fbLogoutBtn").addEventListener("click", async () => {
+  if (fbAuth) await fbAuth.signOut();
+
+  $("firebaseApp").classList.add("hidden");
+  $("firebaseLogin").classList.remove("hidden");
+  $("wishItems").replaceChildren();
+  status("fbStatus", "");
+});
+
+$("fbRefreshBtn").addEventListener("click", loadWishes);
+
+async function showFirebaseApp() {
+  if (!fbAuth || !fbAuth.currentUser) return;
+
+  $("firebaseLogin").classList.add("hidden");
+  $("firebaseApp").classList.remove("hidden");
+
+  await loadWishes();
+}
+
+async function loadWishes() {
+  if (!fbDb || !fbAuth || !fbAuth.currentUser) return;
+
+  status("fbStatus", "Đang tải lời chúc...");
+  $("wishItems").replaceChildren();
+
+  try {
+    const snapshot = await fbDb.ref("tetWishes").once("value");
+
+    if (!snapshot.exists()) {
+      status(
+        "fbStatus",
+        "Chưa có lời chúc trong nhánh tetWishes."
+      );
+      return;
+    }
+
+    const rows = [];
+
+    snapshot.forEach(child => {
+      rows.push({
+        id: child.key,
+        value: child.val()
+      });
+    });
+
+    rows.sort((a, b) =>
+      Number(b.value?.createdAt || 0) -
+      Number(a.value?.createdAt || 0)
+    );
+
+    status("fbStatus", `Đã tải ${rows.length} lời chúc.`);
+
+    for (const row of rows) {
+      const card = document.createElement("article");
+      card.className = "item";
+
+      const head = document.createElement("div");
+      head.className = "row";
+
+      const title = document.createElement("strong");
+      title.textContent = "Lời chúc · " + row.id;
+
+      const date = document.createElement("span");
+      date.className = "pill";
+      date.textContent = row.value?.createdAt
+        ? new Date(Number(row.value.createdAt)).toLocaleString("vi-VN")
+        : "Không có thời gian";
+
+      const message = document.createElement("p");
+      message.textContent = String(
+        row.value?.message ??
+        row.value?.text ??
+        "(Không tìm thấy trường message/text)"
+      );
+
+      head.append(title, date);
+      card.append(head, message);
+      $("wishItems").append(card);
+    }
+  } catch (error) {
+    status(
+      "fbStatus",
+      "Không đọc được lời chúc: " + error.message +
+      ". Kiểm tra databaseURL và Realtime Database Rules."
+    );
+  }
+}
+
+if (fbAuth) {
+  fbAuth.onAuthStateChanged(user => {
+    if (user) {
+      showFirebaseApp();
+    } else {
+      $("firebaseApp").classList.add("hidden");
+      $("firebaseLogin").classList.remove("hidden");
+    }
+  });
+}
+</script>
+</body>
+</html>

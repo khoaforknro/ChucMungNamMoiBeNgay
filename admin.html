@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quản lý lời nhắn voice</title>
+<style>body{font-family:system-ui,sans-serif;max-width:900px;margin:32px auto;padding:0 16px;background:#fff9ef;color:#43252a}input,button{font:inherit;padding:10px;margin:4px 0}input{width:min(100%,420px);display:block}button{cursor:pointer;border:0;border-radius:8px;background:#6e1930;color:white}audio{display:block;width:min(100%,500px);margin:8px 0}.item{padding:14px;margin:12px 0;border:1px solid #e6d7c6;border-radius:12px;background:white}.muted{color:#765e60}#app{display:none}</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body>
+<h1>Hộp thư giọng nói 💌</h1><p class="muted">Trang quản lý riêng. Bucket phải để Private; không chia sẻ key quản trị.</p>
+<section id="login"><label>Email quản trị<input id="email" type="email" autocomplete="username"></label><label>Mật khẩu<input id="password" type="password" autocomplete="current-password"></label><button id="loginBtn">Đăng nhập</button><p id="loginStatus" role="status"></p></section>
+<section id="app"><p>Đã đăng nhập. <button id="refreshBtn">Tải lại danh sách</button> <button id="logoutBtn">Đăng xuất</button></p><p id="status" role="status"></p><div id="items"></div></section>
+<script>
+// Điền cùng Supabase Project URL và publishable/anon key như trang gửi voice.
+const SUPABASE_URL = "https://ndjzcuqlhfodtzlnnqzj.supabase.co/";
+const SUPABASE_ANON_KEY = "sb_publishable_n0k-2ONWg1vym5yvIzugVw_5_0OrXo1";
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = id => document.getElementById(id);
+$('loginBtn').onclick = async () => { $('loginStatus').textContent='Đang đăng nhập…'; const {error}=await client.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value}); if(error){$('loginStatus').textContent='Đăng nhập thất bại: '+error.message;return;} $('loginStatus').textContent=''; await showApp(); };
+$('logoutBtn').onclick = async()=>{await client.auth.signOut();$('app').style.display='none';$('login').style.display='block';$('items').innerHTML='';};
+$('refreshBtn').onclick = loadFiles;
+async function showApp(){const {data:{session}}=await client.auth.getSession();if(!session)return;$('login').style.display='none';$('app').style.display='block';await loadFiles();}
+async function loadFiles(){ $('status').textContent='Đang tải…';$('items').innerHTML='';const {data,error}=await client.storage.from('voice-messages').list('',{limit:100,sortBy:{column:'created_at',order:'desc'}});if(error){$('status').textContent='Không tải được: '+error.message;return;}if(!data||!data.length){$('status').textContent='Chưa có ghi âm nào.';return;} $('status').textContent=`Có ${data.length} tệp gần nhất (tối đa 100).`;
+for(const file of data){if(!file.name||file.name.startsWith('.'))continue;const card=document.createElement('article');card.className='item';const title=document.createElement('strong');title.textContent=file.name;const date=document.createElement('p');date.className='muted';date.textContent=file.created_at?new Date(file.created_at).toLocaleString('vi-VN'):'Thời gian không có sẵn';const audio=document.createElement('audio');audio.controls=true;audio.preload='none';const play=document.createElement('button');play.textContent='Tạo link nghe tạm thời';play.onclick=async()=>{play.disabled=true;const {data:link,error}=await client.storage.from('voice-messages').createSignedUrl(file.name,120);if(error){$('status').textContent='Không tạo được link: '+error.message;play.disabled=false;return;}audio.src=link.signedUrl;audio.load();play.textContent='Link nghe có hạn 2 phút';play.disabled=false;};const del=document.createElement('button');del.textContent='Xóa ghi âm';del.style.marginLeft='8px';del.onclick=async()=>{if(!confirm('Xóa vĩnh viễn ghi âm này?'))return;const {error}=await client.storage.from('voice-messages').remove([file.name]);if(error){$('status').textContent='Xóa lỗi: '+error.message;return;}await loadFiles();};card.append(title,date,play,del,audio);$('items').append(card);}}
+(async()=>{const {data:{session}}=await client.auth.getSession();if(session)await showApp();})();
+</script></body></html>
