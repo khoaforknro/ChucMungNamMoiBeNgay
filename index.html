@@ -1163,7 +1163,7 @@ function startLetter() {
 const MESSENGER_URL = "https://m.me/DuongQuocKhoa1103";
 
 function openMessenger() {
-  if (!https://m.me/DuongQuocKhoa1103) {
+  if (!MESSENGER_URL || MESSENGER_URL.trim() === "") {
     alert("Anh cần điền link Messenger cá nhân vào biến MESSENGER_URL trong code trước nhé.");
     return;
   }
