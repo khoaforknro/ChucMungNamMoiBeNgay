@@ -371,7 +371,7 @@ async function loadVoiceFiles() {
         try {
           const { data, error } = await sb.storage
             .from(SUPABASE_BUCKET)
-            .createSignedUrl(file.name, 120);
+            .createSignedUrl(file.name, 3600);
 
           if (error) throw error;
 
