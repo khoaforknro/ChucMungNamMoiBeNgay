@@ -1308,10 +1308,17 @@ async function sendVoiceMessage() {
     status.textContent = "Gửi thành công rồi! Anh sẽ nghe lời nhắn của em sớm nha. 💛";
     resetVoiceRecording(false);
   } catch (error) {
-    console.error(error);
-    status.textContent = "Gửi chưa thành công. Kiểm tra Supabase URL/key, bucket và Storage Policies nhé.";
-    sendButton.disabled = false;
-  }
+  console.error("Supabase upload error:", error);
+
+  status.textContent =
+    "Lỗi: " +
+    (error.message ||
+      error.error_description ||
+      error.error ||
+      String(error));
+
+  sendButton.disabled = false;
+}
 }
 
 // Cấu hình Firebase Realtime Database của anh. Thay các giá trị mẫu bằng config thật.
