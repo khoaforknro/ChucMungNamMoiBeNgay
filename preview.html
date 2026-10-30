@@ -377,7 +377,7 @@ async function loadVoiceFiles() {
 
           audio.src = data.signedUrl;
           audio.load();
-          play.textContent = "Link nghe có hạn 2 phút";
+          play.textContent = "Link nghe có hạn 1 tiếng";
         } catch (error) {
           status("sbStatus", "Lỗi tạo link nghe: " + error.message);
         } finally {
