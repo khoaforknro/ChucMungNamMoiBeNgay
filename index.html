@@ -843,9 +843,9 @@ body {
     </div>
 
     <form class="choice-form" id="firebaseWishForm" onsubmit="sendTetWish(event)">
-      <label for="tetWishText">Lời chúc Tết của em dành cho anh</label>
-      <textarea id="tetWishText" rows="4" maxlength="1000" placeholder="Viết lời chúc ở đây nè..." required></textarea>
-      <button class="btn" type="submit" style="width:100%;margin-top:12px">Gửi lời chúc 🌸</button>
+      <label for="tetWishText">Lời chúc của em muốn gửi cho anh</label>
+      <textarea id="tetWishText" rows="4" maxlength="10000" placeholder="Viết lời chúc ở đây nè..." required></textarea>
+      <button class="btn" type="submit" style="width:100%;margin-top:12px">Gửi tâm ý của em 🌸</button>
       <p id="firebaseWishStatus" role="status" aria-live="polite"></p>
     </form>
 
@@ -853,7 +853,7 @@ body {
       <button class="btn secondary" onclick="goTo('lucky')">← Xem lại bao lì xì</button>
       <button class="btn" onclick="goTo('home')">Về đầu trang 🌸</button>
     </div>
-    <div class="footer">Chúc em một năm mới an lành. Cảm ơn em vì đã ghé qua đây.</div>
+    <div class="footer">Chúc em một năm mới an lành hạnh phúc, gặp nhiều may mắn. Cảm ơn em vì đã dành thời gian ghé qua đây.</div>
   </div>
 </section>
 
@@ -1156,7 +1156,7 @@ function startLetter() {
   // Chữ ký hiện trước, đợi 5 giây rồi mới hiện nút tiếp tục.
   setTimeout(() => {
     button.classList.remove("hidden");
-  }, signatureDelay + 2000);
+  }, signatureDelay + 1000);
 }
 
 // Dán link Messenger cá nhân của anh vào đây (ví dụ: https://m.me/DuongQuocKhoa1103).
